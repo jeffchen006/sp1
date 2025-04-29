@@ -96,7 +96,7 @@ impl Prover<CpuProverComponents> for CudaProver {
         kind: SP1ProofMode,
     ) -> Result<SP1ProofWithPublicValues> {
         // Generate the core proof.
-        let proof = self.cuda_prover.prove_core(stdin)?;
+        let proof = self.cuda_prover.prove_core_stateless(pk.elf.clone(), stdin)?;
         if kind == SP1ProofMode::Core {
             return Ok(SP1ProofWithPublicValues::new(
                 SP1Proof::Core(proof.proof.0),
